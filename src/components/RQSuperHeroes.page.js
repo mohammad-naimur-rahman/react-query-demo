@@ -1,6 +1,5 @@
-import axios from 'axios'
 import React from 'react'
-import { useQuery } from 'react-query'
+import { Link } from 'react-router-dom'
 import { useSuperHeroesData } from '../hooks/userSuperHeroesdata'
 
 /*
@@ -50,7 +49,11 @@ const RQSuperHeroes = () => {
       {isError && <h2>Error: {error.message}</h2>}
       <button onClick={refetch}>Fetch the heroes</button>
       {data?.data.map(hero => {
-        return <div key={hero.id}>{hero.name}</div>
+        return (
+          <div key={hero.id}>
+            <Link to={`/rq-super-heroes/${hero.id}`}>{hero.name}</Link>
+          </div>
+        )
       })}
       {/* {data?.map(heroName => {
         return <div key={heroName}>{heroName}</div>
