@@ -20,10 +20,26 @@ The options for refetchOnWindowFocus is the same as refetchOnMount.
 ## refetchInterval --> It refetches the data every certain time. The default value is 0 second. It stops works when it looses its focus. It continue to refetch when refetchIntervalInBackground is set to true.
 
 ## refetchIntervalInBackground --> It enables refetchInverval to refetch even in the background. Options are: true, false. The default value is false.
+
+## enabled --> It enables useQuery to run. The default value is true. It is used when it needs to fetch data on any event like onClick etc by enabled false and trigger only by the onClick.
+
+## onSuccess --> It runs a callback function when the data is successfully fetched. Pass a function as a parameter. The callback function gets the response as a parameter. 
+
+## onError --> It runs a callback function when the data is failed to fetch. Pass a function as a parameter. The callback function gets the response as a parameter.
+
+## select --> It selects the data from the response by a callback function. Pass a function as a parameter. The callback function gets the response. It is used when you want to select the data from the response and you can get specific data and also can filter data. 
  */
 
 const RQSuperHeroes = () => {
-  const { isLoading, data, isError, error } = useQuery(
+  const onSuccess = data => {
+    console.log('Success', data)
+  }
+
+  const onError = error => {
+    console.log('Error', error)
+  }
+
+  const { isLoading, isFetching, data, isError, error, refetch } = useQuery(
     'super-heroes',
     () => axios.get('http://localhost:4000/superheroes'),
     {
@@ -32,18 +48,29 @@ const RQSuperHeroes = () => {
       refetchOnMount: true,
       refetchOnWindowFocus: true,
       refetchInterval: 2 * 1000,
-      refetchIntervalInBackground: true
+      refetchIntervalInBackground: true,
+      enabled: false,
+      onSuccess: onSuccess,
+      onError: onError
+      // select: data => {
+      //   const superHeroNames = data.data.map(hero => hero.name)
+      //   return superHeroNames
+      // }
     }
   )
 
   return (
     <div>
       <h2>RQ Super Heroes Page</h2>
-      {isLoading && <h2>Loading...</h2>}
+      {(isLoading || isFetching) && <h2>Loading...</h2>}
       {isError && <h2>Error: {error.message}</h2>}
+      <button onClick={refetch}>Fetch the heroes</button>
       {data?.data.map(hero => {
         return <div key={hero.id}>{hero.name}</div>
       })}
+      {/* {data?.map(heroName => {
+        return <div key={heroName}>{heroName}</div>
+      })} */}
     </div>
   )
 }
