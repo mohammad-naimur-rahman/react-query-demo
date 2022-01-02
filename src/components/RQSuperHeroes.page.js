@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useQuery } from 'react-query'
+import { useSuperHeroesData } from '../hooks/userSuperHeroesdata'
 
 /*
 Let's talk about the options that goes as 3rd param of useQuery.
@@ -39,25 +40,8 @@ const RQSuperHeroes = () => {
     console.log('Error', error)
   }
 
-  const { isLoading, isFetching, data, isError, error, refetch } = useQuery(
-    'super-heroes',
-    () => axios.get('http://localhost:4000/superheroes'),
-    {
-      cacheTime: 10 * 1000 * 60,
-      staleTime: 30 * 1000,
-      refetchOnMount: true,
-      refetchOnWindowFocus: true,
-      refetchInterval: 2 * 1000,
-      refetchIntervalInBackground: true,
-      enabled: false,
-      onSuccess: onSuccess,
-      onError: onError
-      // select: data => {
-      //   const superHeroNames = data.data.map(hero => hero.name)
-      //   return superHeroNames
-      // }
-    }
-  )
+  const { isLoading, isFetching, data, isError, error, refetch } =
+    useSuperHeroesData(onSuccess, onError)
 
   return (
     <div>
