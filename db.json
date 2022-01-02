@@ -15,5 +15,19 @@
       "name": "Spiderman",
       "alterEgo": "Peter Parker"
     }
+  ],
+  "friends": [
+    {
+      "id": 1,
+      "name": "Unga Bunga"
+    },
+    {
+      "id": 2,
+      "name": "Bunga Unga"
+    },
+    {
+      "id": 3,
+      "name": "Golu Molu"
+    }
   ]
 }
