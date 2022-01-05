@@ -42,5 +42,43 @@
       "id": "Developer",
       "jobs": ["React", "Node", "Express"]
     }
+  ],
+  "colors": [
+    {
+      "id": 1,
+      "name": "Red"
+    },
+    {
+      "id": 2,
+      "name": "Green"
+    },
+    {
+      "id": 3,
+      "name": "Blue"
+    },
+    {
+      "id": 4,
+      "name": "Yellow"
+    },
+    {
+      "id": 5,
+      "name": "Orange"
+    },
+    {
+      "id": 6,
+      "name": "Purple"
+    },
+    {
+      "id": 7,
+      "name": "Pink"
+    },
+    {
+      "id": 8,
+      "name": "Black"
+    },
+    {
+      "id": 9,
+      "name": "White"
+    }
   ]
 }

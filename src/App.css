@@ -1,3 +1,7 @@
+body {
+  padding: 0 1em;
+}
+
 nav ul {
   display: flex;
   background-color: blanchedalmond;
