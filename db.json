@@ -29,5 +29,18 @@
       "id": 3,
       "name": "Golu Molu"
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "occupation": "Developer"
+    }
+  ],
+  "works": [
+    {
+      "id": "Developer",
+      "jobs": ["React", "Node", "Express"]
+    }
   ]
 }
