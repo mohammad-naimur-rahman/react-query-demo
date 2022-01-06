@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useSuperHeroesData } from '../hooks/userSuperHeroesdata'
+import {
+  useAddSuperHero,
+  useSuperHeroesData
+} from '../hooks/userSuperHeroesdata'
 
 /*
 Let's talk about the options that goes as 3rd param of useQuery.
@@ -42,9 +45,47 @@ const RQSuperHeroes = () => {
   const { isLoading, isFetching, data, isError, error, refetch } =
     useSuperHeroesData(onSuccess, onError)
 
+  const [name, setname] = useState('')
+  const [alterEgo, setalterEgo] = useState('')
+
+  const {
+    mutate,
+    isLoading: isPostLoading,
+    isError: isPostError,
+    error: postError
+  } = useAddSuperHero(name, alterEgo)
+
+  const onSubmit = e => {
+    e.preventDefault()
+    setname('')
+    setalterEgo('')
+    mutate()
+    refetch()
+  }
+
   return (
     <div>
       <h2>RQ Super Heroes Page</h2>
+      <form
+        onSubmit={onSubmit}
+        style={{ display: 'flex', flexDirection: 'column', width: '300px' }}
+      >
+        <input
+          type="text"
+          name="name"
+          placeholder="Hero name"
+          value={name}
+          onChange={e => setname(e.target.value)}
+        />
+        <input
+          type="text"
+          name="alterEgo"
+          placeholder="Hero Alter Ego"
+          value={alterEgo}
+          onChange={e => setalterEgo(e.target.value)}
+        />
+        <button type="submit">Add Hero</button>
+      </form>
       {(isLoading || isFetching) && <h2>Loading...</h2>}
       {isError && <h2>Error: {error.message}</h2>}
       <button onClick={refetch}>Fetch the heroes</button>

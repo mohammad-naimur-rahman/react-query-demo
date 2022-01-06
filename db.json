@@ -14,6 +14,21 @@
       "id": 3,
       "name": "Spiderman",
       "alterEgo": "Peter Parker"
+    },
+    {
+      "name": "Naimur Rahman",
+      "alterEgo": "Invisibility",
+      "id": "c5056968-568c-4df0-be4d-f4099a2b8093"
+    },
+    {
+      "name": "Tasiana",
+      "alterEgo": "Itchy Bitchy",
+      "id": "c33ed41f-62bc-4484-84dc-062fc2736724"
+    },
+    {
+      "name": "Tasiana",
+      "alterEgo": "Itchy Bitchy",
+      "id": "f1b718b7-eb84-405a-b621-53c8e4eb565e"
     }
   ],
   "friends": [
@@ -40,7 +55,11 @@
   "works": [
     {
       "id": "Developer",
-      "jobs": ["React", "Node", "Express"]
+      "jobs": [
+        "React",
+        "Node",
+        "Express"
+      ]
     }
   ],
   "colors": [
