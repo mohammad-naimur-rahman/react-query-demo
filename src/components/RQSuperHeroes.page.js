@@ -90,8 +90,8 @@ const RQSuperHeroes = () => {
       <button onClick={refetch}>Fetch the heroes</button>
       {data?.data.map(hero => {
         return (
-          <div key={hero.id}>
-            <Link to={`/rq-super-heroes/${hero.id}`}>{hero.name}</Link>
+          <div key={hero?.id}>
+            <Link to={`/rq-super-heroes/${hero?.id}`}>{hero?.name}</Link>
           </div>
         )
       })}

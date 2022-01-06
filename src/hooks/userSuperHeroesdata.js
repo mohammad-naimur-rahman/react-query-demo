@@ -34,7 +34,30 @@ export const useAddSuperHero = (name, alterEgo) => {
         id: uuid()
       }),
     {
-      onSuccess: () => {
+      // onSuccess: data => {
+      //   //queryClient.invalidateQueries('super-heroes')
+      //   queryClient.setQueryData('super-heroes', oldData => {
+      //     return {
+      //       ...oldData,
+      //       data: [...oldData.data, data.data]
+      //     }
+      //   })
+      // }
+      onMutate: async newHero => {
+        await queryClient.cancelQueries('super-heroes')
+        const previousHeroData = queryClient.getQueryData('super-heroes')
+        queryClient.setQueryData('super-heroes', oldQueryData => {
+          return {
+            ...oldQueryData,
+            data: [...oldQueryData.data, newHero]
+          }
+        })
+        return { previousHeroData }
+      },
+      onError: (_err, _newTodo, context) => {
+        queryClient.setQueryData('super-heroes', context.previousHeroData)
+      },
+      onSettled: () => {
         queryClient.invalidateQueries('super-heroes')
       }
     }
