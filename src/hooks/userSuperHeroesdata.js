@@ -1,11 +1,12 @@
-import axios from 'axios'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { v4 as uuid } from 'uuid'
+import { request } from '../utils/axios-interceptor'
 
 export const useSuperHeroesData = (onSuccess, onError) => {
   return useQuery(
     'super-heroes',
-    () => axios.get('http://localhost:4000/superheroes'),
+    //() => axios.get('http://localhost:4000/superheroes'),
+    () => request({ url: '/superheroes' }),
     {
       // cacheTime: 10 * 1000 * 60,
       // staleTime: 30 * 1000,
@@ -27,11 +28,17 @@ export const useSuperHeroesData = (onSuccess, onError) => {
 export const useAddSuperHero = (name, alterEgo) => {
   const queryClient = useQueryClient()
   return useMutation(
+    // () =>
+    //   axios.post('http://localhost:4000/superheroes', {
+    //     name,
+    //     alterEgo,
+    //     id: uuid()
+    //   }),
     () =>
-      axios.post('http://localhost:4000/superheroes', {
-        name,
-        alterEgo,
-        id: uuid()
+      request({
+        url: '/superheroes',
+        method: 'post',
+        data: { name, alterEgo, id: uuid() }
       }),
     {
       // onSuccess: data => {
