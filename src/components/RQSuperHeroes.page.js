@@ -60,7 +60,6 @@ const RQSuperHeroes = () => {
     setname('')
     setalterEgo('')
     mutate()
-    refetch()
   }
 
   return (
